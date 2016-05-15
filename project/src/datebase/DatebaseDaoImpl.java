@@ -18,8 +18,10 @@ public class DatebaseDaoImpl {
 			Class.forName("oracle.jdbc.OracleDriver");
 			System.out.println("드라이버로딩성공!");
 			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String id ="";
+			String pwd="";
 			// 127.0.0.1 : 루프  아이피로 자신의 컴퓨터로 다시 돌아간다.
-			con = DriverManager.getConnection(url, "scott", "tiger");
+			con = DriverManager.getConnection(url,id,pwd);
 			System.out.println("db접속 성공!!!");
 			// sql 구문을 실행하는 객체 얻어오기
 			stmt = con.createStatement();
