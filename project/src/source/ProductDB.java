@@ -10,7 +10,8 @@ import dto.SmartTv;
 
 public class ProductDB {
 	private static ArrayList<Product> productList =new ArrayList<Product>();
-	
+	// arraylist를 product형식으로 불러온다 
+	//
 	static{
 		productList.add(new SmartTv("파브",10988668,"001"));
 		productList.add(new SmartTv("파브2",10934368,"002"));
@@ -19,7 +20,7 @@ public class ProductDB {
 		productList.add(new CellPhone("GaluxyS5",1042332256,"001"));
 		Collections.sort(productList,new ProductComparator());
 	}
-	
+	//arraylist 추가
 	
 	private ProductDB(){}
 	public static ArrayList<Product> getMemberList(){
