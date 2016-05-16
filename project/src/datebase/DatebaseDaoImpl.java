@@ -12,18 +12,18 @@ public class DatebaseDaoImpl {
 	private Statement stmt;
 	private Scanner scan = new Scanner(System.in);
 
-	// »ı¼ºÀÚ¿¡¼­ DB¿¡ Á¢¼ÓÇÏ±â
+	// ìƒì„±ìì—ì„œ DBì— ì ‘ì†í•˜ê¸°
 	public DatebaseDaoImpl() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-			System.out.println("µå¶óÀÌ¹ö·Îµù¼º°ø!");
+			System.out.println("ë“œë¼ì´ë²„ë¡œë”©ì„±ê³µ!");
 			String url = "jdbc:oracle:thin:@localhost:1521:XE";
 			String id ="";
 			String pwd="";
-			// 127.0.0.1 : ·çÇÁ  ¾ÆÀÌÇÇ·Î ÀÚ½ÅÀÇ ÄÄÇ»ÅÍ·Î ´Ù½Ã µ¹¾Æ°£´Ù.
+			// 127.0.0.1 : ë£¨í”„  ì•„ì´í”¼ë¡œ ìì‹ ì˜ ì»´í“¨í„°ë¡œ ë‹¤ì‹œ ëŒì•„ê°„ë‹¤.
 			con = DriverManager.getConnection(url,id,pwd);
-			System.out.println("dbÁ¢¼Ó ¼º°ø!!!");
-			// sql ±¸¹®À» ½ÇÇàÇÏ´Â °´Ã¼ ¾ò¾î¿À±â
+			System.out.println("dbì ‘ì† ì„±ê³µ!!!");
+			// sql êµ¬ë¬¸ì„ ì‹¤í–‰í•˜ëŠ” ê°ì²´ ì–»ì–´ì˜¤ê¸°
 			stmt = con.createStatement();
 		} catch (ClassNotFoundException ce) {
 			System.out.println(ce.getMessage());

@@ -11,12 +11,12 @@ class KmaData
     int data;
     String city;
     String mode;
-    String numEf; // nÀÏ ÈÄ ¿¹º¸
-    String tmEf; // ³â¿ùÀÏ**
-    String wf; // ³¯¾¾¿¹º¸**
-    String tmn; // ÃÖÀú¿Âµµ***
-    String tmx; // ÃÖ°í¿Âµµ***
-    String reliability; // ½Å·Úµµ***
+    String numEf; // nì¼ í›„ ì˜ˆë³´
+    String tmEf; // ë…„ì›”ì¼**
+    String wf; // ë‚ ì”¨ì˜ˆë³´**
+    String tmn; // ìµœì €ì˜¨ë„***
+    String tmx; // ìµœê³ ì˜¨ë„***
+    String reliability; // ì‹ ë¢°ë„***
 
 }
 
@@ -28,7 +28,7 @@ public class ConnectXml
 	int allCount = 0;
 	
 	
-	// 1. DocumentBuilderFactory °´Ã¼»ı¼º
+	// 1. DocumentBuilderFactory ê°ì²´ìƒì„±
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 	// ArrayList<KmaData> kmaData;
@@ -36,23 +36,23 @@ public class ConnectXml
 
 	try
 	{
-	    // 2. DocumentBuilder °´Ã¼ »ı¼º
+	    // 2. DocumentBuilder ê°ì²´ ìƒì„±
 	    DocumentBuilder builder = factory.newDocumentBuilder();
 
-	    // DocumentBuilder °´Ã¼¸¦ ÅëÇØ ¿øÇÏ´Â XML¹®¼­ÀÇ Document°´Ã¼¸¦ ¾ò¾î³½´Ù.
-	    // 3. Document °´Ã¼ »ı¼º
+	    // DocumentBuilder ê°ì²´ë¥¼ í†µí•´ ì›í•˜ëŠ” XMLë¬¸ì„œì˜ Documentê°ì²´ë¥¼ ì–»ì–´ë‚¸ë‹¤.
+	    // 3. Document ê°ì²´ ìƒì„±
 	    // Document doc = builder.parse("./addressbook.xml");
 	    Document doc = builder
 		    .parse("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=146");
 
 	    NodeList cityList = doc.getElementsByTagName("city");
 
-	    System.out.println("City Elements °¹¼ö : " + cityList.getLength());
+	    System.out.println("City Elements ê°¯ìˆ˜ : " + cityList.getLength());
 	    for (int i = 0; i < cityList.getLength(); i++)
 	    {
 		Node cityNode = cityList.item(i);
 		//System.out.println(cityNode.getChildNodes().item(0)
-		//	.getNodeValue()); // ºÎ»ê, ¿ï»ê, °æ³²
+		//	.getNodeValue()); // ë¶€ì‚°, ìš¸ì‚°, ê²½ë‚¨
 
 		Node Temp = cityNode.getNextSibling();
 
@@ -111,7 +111,7 @@ public class ConnectXml
 				
 				//kmaTemp.city = "test";
 				//System.out.print(data.getNodeName() + " ");
-				//System.out.print(data.getChildNodes().item(0).getNodeValue()+ " "); // ºÎ»ê, ¿ï»ê, °æ³²
+				//System.out.print(data.getChildNodes().item(0).getNodeValue()+ " "); // ë¶€ì‚°, ìš¸ì‚°, ê²½ë‚¨
 			    }
 
 			}
@@ -132,16 +132,16 @@ public class ConnectXml
 		System.out.print( kmaList.get(i).mode + " / ");
 		//System.out.print( kmaList.get(i).numEf + " / ");
 		
-		System.out.print("³¯Â¥:");
+		System.out.print("ë‚ ì§œ:");
 		System.out.print( kmaList.get(i).tmEf + " / ");
-		System.out.print("½Å·Úµµ:");
+		System.out.print("ì‹ ë¢°ë„:");
 		System.out.print( kmaList.get(i).reliability + " / ");
 		
 		
-		System.out.print("ÃÖÀú:");
+		System.out.print("ìµœì €:");
 		System.out.printf("%2d / ", Integer.parseInt(kmaList.get(i).tmn));
 		
-		System.out.print("ÃÖ°í:");
+		System.out.print("ìµœê³ :");
 		System.out.printf("%2d / ", Integer.parseInt(kmaList.get(i).tmx));
 		//System.out.print( kmaList.get(i).tmn + " / ");
 		//System.out.print( kmaList.get(i).tmx + " / ");
@@ -154,13 +154,13 @@ public class ConnectXml
 	    }
 
 	    /*
-	     * // 4. root Element ¾ò¾î¿À±â Element root = doc.getDocumentElement();
+	     * // 4. root Element ì–»ì–´ì˜¤ê¸° Element root = doc.getDocumentElement();
 	     * 
 	     * System.out.println( "root : " + root.getNodeName() );
 	     * 
-	     * // 5. NodeList ¾ò¾î¿À±â // ¿©±â¿¡¼­ ÁÖÀÇÇÒÁ¡ÀÌ ÀÖ´Ù. // XML¹®¼­¿¡¼­ ÇÏÀ§ ¾Ù¸®¸ÕÆ®¸¦ È®ÀÎÇÏ±â
-	     * À§ÇØ¼­ °³ÇàÇÒ¶§¿¡ Text°´Ã¼°¡ Æ÷ÇÔµÈ´Ù. // µû¶ó¼­ ÇöÀç´Â 2°³ÀÇ ¾Ù¸®¸ÕÆ®¸¸ ÀÖÁö¸¸ Text°´Ã¼°¡ 3°³°¡ Æ÷ÇÔµÇ¾î
-	     * 5°³°¡ µÈ´Ù. NodeList list = root.getChildNodes();
+	     * // 5. NodeList ì–»ì–´ì˜¤ê¸° // ì—¬ê¸°ì—ì„œ ì£¼ì˜í• ì ì´ ìˆë‹¤. // XMLë¬¸ì„œì—ì„œ í•˜ìœ„ ì•¨ë¦¬ë¨¼íŠ¸ë¥¼ í™•ì¸í•˜ê¸°
+	     * ìœ„í•´ì„œ ê°œí–‰í• ë•Œì— Textê°ì²´ê°€ í¬í•¨ëœë‹¤. // ë”°ë¼ì„œ í˜„ì¬ëŠ” 2ê°œì˜ ì•¨ë¦¬ë¨¼íŠ¸ë§Œ ìˆì§€ë§Œ Textê°ì²´ê°€ 3ê°œê°€ í¬í•¨ë˜ì–´
+	     * 5ê°œê°€ ëœë‹¤. NodeList list = root.getChildNodes();
 	     * //System.out.println( "list count : " + list.getLength() );
 	     * 
 	     * 
@@ -177,7 +177,7 @@ public class ConnectXml
 	     * //System.out.println(i); System.out.println( "node[" + (i+1) +
 	     * "]:" + node.getNodeName() ); }
 	     * 
-	     * // rootÀÇ ÀÚ½Ä ¾Ù¸®¸ÕÆ®Áß ÀÌ¸§ÀÌ "member"ÀÎ ¾Ù¸®¸ÕÆ®¸¸À» °¡Áö°í ¿Â´Ù. list =
+	     * // rootì˜ ìì‹ ì•¨ë¦¬ë¨¼íŠ¸ì¤‘ ì´ë¦„ì´ "member"ì¸ ì•¨ë¦¬ë¨¼íŠ¸ë§Œì„ ê°€ì§€ê³  ì˜¨ë‹¤. list =
 	     * root.getElementsByTagName( "name" ); System.out.println(
 	     * "tag name list count : " + list.getLength() );
 	     * 
@@ -198,4 +198,3 @@ public class ConnectXml
 	}
     }
 }
-
