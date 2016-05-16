@@ -2,43 +2,45 @@ package main;
 
 import java.util.Scanner;
 
-import dao.MemberDAO;
-import dao.MemberDAOImpl;
-import service.MemberServiceImpl2;
-import service.ProductServiceImpl;
+import main.Member.ConnectUser;
+import main.Member.MemberSession;
+
+
 
 public class Main {
-	public void start() {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		connect();
+	}
+	public static void connect(){
+		ConnectUser connect = new ConnectUser();
 		Scanner scan = new Scanner(System.in);
-		MemberDAO memberDAO=new MemberDAOImpl();
-		//ProductDAO productDAO=new ProductDAOImpl();
 
-		while (ShopSession.getSession() != null) {
-			System.out.println("******** 메인페이지 *********");
-			System.out.println("1. 상품리스트");
-			System.out.println("2. 회원정보 조회");
-			System.out.println("3. 탈퇴");
-			System.out.println("4. 종료");
-			System.out.println("메뉴를 선택하시오.");
-
-			switch (scan.nextLine().trim()) {
-			case "1": // 상품리스트
-				new ProductServiceImpl().productList();
+		System.out.println("******* Kim's Shop *******");
+		System.out.println("Kim's Shop 에 오신걸 환영합니다.");
+		System.out.println();
+		System.out.println();
+		while (true) {
+			System.out.println("1.로그인");
+			System.out.println("2.회원가입");
+			System.out.println("메뉴를 선택하세요.");
+			switch (scan.nextLine()) {
+			case "1":
+				connect.login(); //로그인 시도.
+				if(MemberSession.getSession()!=null) {				
+					new LoginList().start();
+				}
+				
 				break;
-			case "2":// 회원정보수정
-				new MemberServiceImpl2(memberDAO).modifyMember();				
-				break;
-			case "3":// 회원탈퇴				
-				memberDAO.deleteMember(ShopSession.getSession().getId());
-				ShopSession.setSession(null);//세션종료.
-				break;
-			case "4":// 종료
-				ShopSession.setSession(null);//세션종료.
-				System.exit(0);//강제종료.
+			case "2":
+				connect.joinus();
 				break;
 			default:
+				System.out.println("\n메뉴 선택이 올바르지 않습니다.\n");				
 				break;
 			}
 		}
 	}
+
 }
