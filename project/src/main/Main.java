@@ -2,8 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-import main.Member.ConnectUser;
-import main.Member.MemberSession;
+import datebase.ConnectUser;
 
 
 
